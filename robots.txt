@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guillebrase.github.io/cool-moments-web/sitemap.xml

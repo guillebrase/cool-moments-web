@@ -4,19 +4,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cool Moments · Bisutería en Lloret de Mar</title>
-  <meta name="description" content="Cool Moments, tienda de bisutería en Carrer de Sant Pere 62, Lloret de Mar. Bisutería y accesorios en plata y acero, minerales, macramé y bolsos de piel.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Sacramento&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Cool Moments, tienda de bisutería y accesorios en Carrer de Sant Pere 62, Lloret de Mar. Plata, acero, minerales, macramé y bolsos de piel. Encargos personalizados y reparaciones.">
+  <link rel="canonical" href="https://guillebrase.github.io/cool-moments-web/">
+  <meta name="theme-color" content="#faf9f7">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, Instagram, Facebook...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cool Moments">
+  <meta property="og:title" content="Cool Moments · Bisutería en Lloret de Mar">
+  <meta property="og:description" content="Plata, acero, minerales, macramé y bolsos de piel en pleno centro de Lloret de Mar.">
+  <meta property="og:url" content="https://guillebrase.github.io/cool-moments-web/">
+  <meta property="og:image" content="https://guillebrase.github.io/cool-moments-web/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="fonts.css">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Datos de la tienda para Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "name": "Cool Moments",
+    "description": "Tienda de bisutería y accesorios en plata y acero, minerales, macramé y bolsos de piel. Encargos personalizados y reparaciones.",
+    "url": "https://guillebrase.github.io/cool-moments-web/",
+    "image": "https://guillebrase.github.io/cool-moments-web/img/tienda.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer de Sant Pere, 62",
+      "addressLocality": "Lloret de Mar",
+      "postalCode": "17310",
+      "addressRegion": "Girona",
+      "addressCountry": "ES"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 41.7016, "longitude": 2.8456 },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "10:00", "closes": "13:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "16:30", "closes": "20:00" }
+    ],
+    "sameAs": ["https://www.instagram.com/coolmomentslloret/"]
+  }
+  </script>
 </head>
 <body>
+
+  <div class="notice" id="notice" hidden>
+    <p class="notice__text" id="noticeText"></p>
+    <button class="notice__close" id="noticeClose" aria-label="Cerrar aviso">✕</button>
+  </div>
 
   <header class="header">
     <div class="wrap header__inner">
       <a href="#inicio" class="logo">cool moments</a>
       <nav class="nav" id="nav">
         <a href="#coleccion" data-i18n="nav.collection">Colección</a>
+        <a href="#encargos" data-i18n="nav.custom">Encargos</a>
         <a href="#nosotros" data-i18n="nav.about">Nosotros</a>
         <a href="#visitanos" data-i18n="nav.visit">Visítanos</a>
       </nav>
@@ -73,17 +120,58 @@
       </div>
     </section>
 
-    <section class="section section--alt" id="nosotros">
-      <div class="wrap about">
-        <img class="about__img" src="img/tienda.jpg" alt="Interior de la tienda Cool Moments" loading="lazy">
-        <div>
-        <h2 data-i18n="about.title">Nosotros</h2>
-        <p data-i18n="about.text">Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.</p>
+    <section class="section section--alt" id="encargos">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-i18n="custom.title">Encargos y reparaciones</h2>
+          <p data-i18n="custom.text">¿Buscas algo que no encuentras o se te ha roto una pieza? Cuéntanoslo y te decimos qué podemos hacer.</p>
+        </div>
+        <div class="custom">
+          <article class="custom__card">
+            <img src="img/japamala.jpg" alt="" loading="lazy">
+            <div>
+              <h3 data-i18n="custom.made.title">Piezas personalizadas</h3>
+              <p data-i18n="custom.made.text">Collares con tu mineral favorito, japamalas a medida, pulseras con nombre o con los colores que elijas.</p>
+            </div>
+          </article>
+          <article class="custom__card">
+            <img src="img/colgante-moldavita.jpg" alt="" loading="lazy">
+            <div>
+              <h3 data-i18n="custom.repair.title">Reparaciones</h3>
+              <p data-i18n="custom.repair.text">Cambiamos cierres, reengarzamos collares y pulseras y arreglamos esa pieza a la que tienes cariño.</p>
+            </div>
+          </article>
+          <form class="custom__form" id="customForm">
+            <label>
+              <span data-i18n="custom.form.type">¿Qué necesitas?</span>
+              <select id="customType">
+                <option value="made" data-i18n="custom.form.made">Una pieza personalizada</option>
+                <option value="repair" data-i18n="custom.form.repair">Una reparación</option>
+                <option value="other" data-i18n="custom.form.other">Otra consulta</option>
+              </select>
+            </label>
+            <label>
+              <span data-i18n="custom.form.msg">Cuéntanos un poco más</span>
+              <textarea id="customMsg" rows="4" maxlength="600" required data-i18n-placeholder="custom.form.ph" placeholder="Ej.: un collar largo con amatista y cuentas de madera"></textarea>
+            </label>
+            <button class="btn btn--dark btn--full" type="submit" data-i18n="custom.form.send">Enviar por WhatsApp</button>
+            <p class="custom__note" data-i18n="custom.form.note">Se abrirá WhatsApp con tu mensaje. Si es una reparación, puedes adjuntar una foto allí.</p>
+          </form>
         </div>
       </div>
     </section>
 
-    <section class="section" id="visitanos">
+    <section class="section" id="nosotros">
+      <div class="wrap about">
+        <img class="about__img" src="img/tienda.jpg" alt="Interior de la tienda Cool Moments" loading="lazy">
+        <div>
+          <h2 data-i18n="about.title">Nosotros</h2>
+          <p data-i18n="about.text">Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="visitanos">
       <div class="wrap visit">
         <div class="visit__info">
           <h2 data-i18n="visit.title">Visítanos</h2>
@@ -107,9 +195,13 @@
           </dl>
           <a class="btn btn--dark" href="https://www.google.com/maps/dir/?api=1&destination=Carrer+de+Sant+Pere+62+Lloret+de+Mar" target="_blank" rel="noopener" data-i18n="visit.directions">Abrir en Google Maps</a>
         </div>
-        <div class="visit__map">
-          <iframe title="Mapa Cool Moments" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Carrer+de+Sant+Pere+62,+17310+Lloret+de+Mar&z=17&output=embed"></iframe>
+        <div class="visit__map" id="map">
+          <div class="map-consent">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <button class="btn btn--ghost" id="mapLoad" type="button" data-i18n="map.load">Ver mapa</button>
+            <p data-i18n="map.note">El mapa lo carga Google Maps, que puede usar cookies.</p>
+            <a href="cookies.html" data-i18n="map.more">Más información</a>
+          </div>
         </div>
       </div>
     </section>
@@ -118,6 +210,11 @@
   <footer class="footer">
     <div class="wrap footer__inner">
       <span class="logo logo--small">cool moments</span>
+      <nav class="footer__legal">
+        <a href="aviso-legal.html" data-i18n="legal.notice">Aviso legal</a>
+        <a href="privacidad.html" data-i18n="legal.privacy">Privacidad</a>
+        <a href="cookies.html" data-i18n="legal.cookies">Cookies</a>
+      </nav>
       <span>© <span id="year"></span> Cool Moments · Lloret de Mar</span>
     </div>
   </footer>

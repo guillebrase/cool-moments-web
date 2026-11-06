@@ -2,6 +2,20 @@
 // Cuando tengas el número, ponlo aquí con prefijo de país y sin espacios ni "+", p. ej. "34600123456".
 const WHATSAPP_NUMBER = "";
 
+// Aviso en la parte de arriba de la web (vacaciones, rebajas...).
+// Para activarlo: activo: true. Si pones fechas, solo se muestra entre "desde" y "hasta" (ambos incluidos).
+const AVISO = {
+  activo: false,
+  desde: "2027-02-01",
+  hasta: "2027-02-16",
+  texto: {
+    es: "Cerramos por vacaciones del 1 al 16 de febrero. ¡Nos vemos a la vuelta!",
+    ca: "Tanquem per vacances de l'1 al 16 de febrer. Ens veiem a la tornada!",
+    en: "We're closed for holidays from 1 to 16 February. See you when we're back!",
+    fr: "Nous sommes fermés pour congés du 1er au 16 février. À bientôt !",
+  },
+};
+
 // Productos (fotos sacadas del Instagram de la tienda). "price": null muestra "Consultar precio".
 // Para poner precio, cambia null por el número, p. ej. price: 18
 const PRODUCTS = [
@@ -35,6 +49,28 @@ const T = {
     "cat.bags": "Bolsos", "price.ask": "Consultar precio", "visit.days": "Lunes a sábado",
     "more.title": "Esto es solo una pequeña muestra", "more.text": "Cada semana llegan piezas nuevas que no da tiempo a subir aquí. Ven a la tienda a descubrirlas todas o mira las últimas novedades en nuestro Instagram.",
     "more.visit": "Ven a la tienda", "more.ig": "Ver novedades en Instagram",
+    "nav.custom": "Encargos",
+    "custom.title": "Encargos y reparaciones",
+    "custom.text": "¿Buscas algo que no encuentras o se te ha roto una pieza? Cuéntanoslo y te decimos qué podemos hacer.",
+    "custom.made.title": "Piezas personalizadas",
+    "custom.made.text": "Collares con tu mineral favorito, japamalas a medida, pulseras con nombre o con los colores que elijas.",
+    "custom.repair.title": "Reparaciones",
+    "custom.repair.text": "Cambiamos cierres, reengarzamos collares y pulseras y arreglamos esa pieza a la que tienes cariño.",
+    "custom.form.type": "¿Qué necesitas?",
+    "custom.form.made": "Una pieza personalizada",
+    "custom.form.repair": "Una reparación",
+    "custom.form.other": "Otra consulta",
+    "custom.form.msg": "Cuéntanos un poco más",
+    "custom.form.ph": "Ej.: un collar largo con amatista y cuentas de madera",
+    "custom.form.send": "Enviar por WhatsApp",
+    "custom.form.note": "Se abrirá WhatsApp con tu mensaje. Si es una reparación, puedes adjuntar una foto allí.",
+    "custom.wa": "¡Hola Cool Moments! Os escribo desde la web.",
+    "map.load": "Ver mapa",
+    "map.note": "El mapa lo carga Google Maps, que puede usar cookies.",
+    "map.more": "Más información",
+    "legal.notice": "Aviso legal",
+    "legal.privacy": "Privacidad",
+    "legal.cookies": "Cookies",
     "add": "Añadir", "added": "Añadido ✓",
     "about.title": "Nosotros",
     "about.text": "Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.",
@@ -57,6 +93,28 @@ const T = {
     "cat.bags": "Bosses", "price.ask": "Consultar preu", "visit.days": "Dilluns a dissabte",
     "more.title": "Això és només una petita mostra", "more.text": "Cada setmana arriben peces noves que no tenim temps de penjar aquí. Vine a la botiga a descobrir-les totes o mira les últimes novetats al nostre Instagram.",
     "more.visit": "Vine a la botiga", "more.ig": "Veure novetats a Instagram",
+    "nav.custom": "Encàrrecs",
+    "custom.title": "Encàrrecs i reparacions",
+    "custom.text": "Busques alguna cosa que no trobes o se t'ha trencat una peça? Explica'ns-ho i et diem què podem fer.",
+    "custom.made.title": "Peces personalitzades",
+    "custom.made.text": "Collarets amb el teu mineral preferit, japamales a mida, polseres amb nom o amb els colors que triïs.",
+    "custom.repair.title": "Reparacions",
+    "custom.repair.text": "Canviem tancaments, tornem a enfilar collarets i polseres i arreglem aquella peça que t'estimes.",
+    "custom.form.type": "Què necessites?",
+    "custom.form.made": "Una peça personalitzada",
+    "custom.form.repair": "Una reparació",
+    "custom.form.other": "Una altra consulta",
+    "custom.form.msg": "Explica'ns una mica més",
+    "custom.form.ph": "Ex.: un collaret llarg amb ametista i boletes de fusta",
+    "custom.form.send": "Enviar per WhatsApp",
+    "custom.form.note": "S'obrirà WhatsApp amb el teu missatge. Si és una reparació, hi pots adjuntar una foto.",
+    "custom.wa": "Hola Cool Moments! Us escric des de la web.",
+    "map.load": "Veure mapa",
+    "map.note": "El mapa el carrega Google Maps, que pot fer servir galetes.",
+    "map.more": "Més informació",
+    "legal.notice": "Avís legal",
+    "legal.privacy": "Privacitat",
+    "legal.cookies": "Galetes",
     "add": "Afegir", "added": "Afegit ✓",
     "about.title": "Nosaltres",
     "about.text": "Cool Moments és una botiga de bijuteria i accessoris al carrer de Sant Pere de Lloret de Mar. Treballem amb plata, acer i minerals, i fem peces personalitzades i reparacions. Estil boho, molt de macramé i bosses de pell natural.",
@@ -79,6 +137,28 @@ const T = {
     "cat.bags": "Bags", "price.ask": "Ask for price", "visit.days": "Monday to Saturday",
     "more.title": "This is just a small selection", "more.text": "New pieces arrive every week, more than we can show here. Come to the shop to discover them all, or see our latest arrivals on Instagram.",
     "more.visit": "Visit the shop", "more.ig": "See new arrivals on Instagram",
+    "nav.custom": "Custom",
+    "custom.title": "Custom pieces & repairs",
+    "custom.text": "Looking for something you can't find, or has a piece broken? Tell us and we'll see what we can do.",
+    "custom.made.title": "Custom pieces",
+    "custom.made.text": "Necklaces with your favourite gemstone, made-to-measure japamalas, bracelets with a name or in the colours you choose.",
+    "custom.repair.title": "Repairs",
+    "custom.repair.text": "We replace clasps, restring necklaces and bracelets and fix that piece you love.",
+    "custom.form.type": "What do you need?",
+    "custom.form.made": "A custom piece",
+    "custom.form.repair": "A repair",
+    "custom.form.other": "Something else",
+    "custom.form.msg": "Tell us a bit more",
+    "custom.form.ph": "E.g. a long necklace with amethyst and wooden beads",
+    "custom.form.send": "Send via WhatsApp",
+    "custom.form.note": "WhatsApp will open with your message. For repairs, you can attach a photo there.",
+    "custom.wa": "Hi Cool Moments! I'm writing from your website.",
+    "map.load": "Show map",
+    "map.note": "The map is loaded by Google Maps, which may use cookies.",
+    "map.more": "More information",
+    "legal.notice": "Legal notice",
+    "legal.privacy": "Privacy",
+    "legal.cookies": "Cookies",
     "add": "Add", "added": "Added ✓",
     "about.title": "About us",
     "about.text": "Cool Moments is a jewellery and accessories shop on Carrer de Sant Pere in Lloret de Mar. We work with silver, steel and gemstones, and we make custom pieces and do repairs. Boho style, lots of macramé and natural leather bags.",
@@ -101,6 +181,28 @@ const T = {
     "cat.bags": "Sacs", "price.ask": "Prix sur demande", "visit.days": "Du lundi au samedi",
     "more.title": "Ceci n'est qu'un petit aperçu", "more.text": "Chaque semaine, de nouvelles pièces arrivent et nous n'avons pas le temps de toutes les montrer ici. Venez les découvrir en boutique ou retrouvez nos dernières nouveautés sur Instagram.",
     "more.visit": "Venir en boutique", "more.ig": "Nouveautés sur Instagram",
+    "nav.custom": "Sur mesure",
+    "custom.title": "Sur mesure et réparations",
+    "custom.text": "Vous cherchez quelque chose d'introuvable ou un bijou s'est cassé ? Dites-le-nous et nous verrons ce que nous pouvons faire.",
+    "custom.made.title": "Pièces personnalisées",
+    "custom.made.text": "Colliers avec votre pierre préférée, japamalas sur mesure, bracelets avec un prénom ou dans les couleurs de votre choix.",
+    "custom.repair.title": "Réparations",
+    "custom.repair.text": "Nous changeons les fermoirs, renfilons colliers et bracelets et réparons le bijou auquel vous tenez.",
+    "custom.form.type": "De quoi avez-vous besoin ?",
+    "custom.form.made": "Une pièce personnalisée",
+    "custom.form.repair": "Une réparation",
+    "custom.form.other": "Autre demande",
+    "custom.form.msg": "Dites-nous en un peu plus",
+    "custom.form.ph": "Ex. : un sautoir avec améthyste et perles en bois",
+    "custom.form.send": "Envoyer par WhatsApp",
+    "custom.form.note": "WhatsApp s'ouvrira avec votre message. Pour une réparation, vous pourrez y joindre une photo.",
+    "custom.wa": "Bonjour Cool Moments ! Je vous écris depuis le site.",
+    "map.load": "Afficher la carte",
+    "map.note": "La carte est chargée par Google Maps, qui peut utiliser des cookies.",
+    "map.more": "Plus d'informations",
+    "legal.notice": "Mentions légales",
+    "legal.privacy": "Confidentialité",
+    "legal.cookies": "Cookies",
     "add": "Ajouter", "added": "Ajouté ✓",
     "about.title": "À propos",
     "about.text": "Cool Moments est une boutique de bijoux et d'accessoires de la Carrer de Sant Pere, à Lloret de Mar. Nous travaillons l'argent, l'acier et les pierres naturelles, et nous réalisons des pièces personnalisées et des réparations. Style bohème, beaucoup de macramé et des sacs en cuir naturel.",
@@ -133,6 +235,8 @@ const euro = (n) => new Intl.NumberFormat(lang + "-ES", { style: "currency", cur
 function applyTexts() {
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+  renderNotice();
   $("#lang").value = lang;
 }
 
@@ -234,4 +338,31 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") openCart(f
 // Limpia productos de la cesta que ya no existan
 cart = Object.fromEntries(Object.entries(cart).filter(([id]) => PRODUCTS.some((p) => p.id === id)));
 $("#year").textContent = new Date().getFullYear();
+// ================== AVISO ==================
+function renderNotice() {
+  const today = new Date().toISOString().slice(0, 10);
+  const inRange = (!AVISO.desde || today >= AVISO.desde) && (!AVISO.hasta || today <= AVISO.hasta);
+  const dismissed = store.get("cm-notice") === AVISO.texto.es;
+  const show = AVISO.activo && inRange && !dismissed;
+  $("#notice").hidden = !show;
+  if (show) $("#noticeText").textContent = AVISO.texto[lang] || AVISO.texto.es;
+}
+$("#noticeClose").addEventListener("click", () => { store.set("cm-notice", AVISO.texto.es); renderNotice(); });
+
+// ================== MAPA (solo se carga si el visitante lo pide) ==================
+function loadMap() {
+  $("#map").innerHTML = '<iframe title="Mapa Cool Moments" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Carrer+de+Sant+Pere+62,+17310+Lloret+de+Mar&z=17&output=embed"></iframe>';
+}
+$("#mapLoad").addEventListener("click", () => { store.set("cm-map", true); loadMap(); });
+if (store.get("cm-map")) loadMap();
+
+// ================== ENCARGOS ==================
+$("#customForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!WHATSAPP_NUMBER) { alert(t("wa.missing")); return; }
+  const type = $("#customType");
+  const msg = `${t("custom.wa")}\n${type.options[type.selectedIndex].text}:\n${$("#customMsg").value.trim()}`;
+  window.open(waLink(msg), "_blank");
+});
+
 renderAll();

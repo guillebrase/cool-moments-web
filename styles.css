@@ -116,6 +116,12 @@ h1, h2, h3 { font-family: var(--head-font); font-weight: 400; margin: 0; letter-
 }
 .add:hover { background: var(--ink); color: #fff; }
 
+/* More in store */
+.more { margin-top: 48px; padding: 40px 24px; border: 1px solid var(--line); border-radius: var(--radius); text-align: center; background: var(--card); }
+.more__title { font-family: var(--head-font); font-size: clamp(22px, 3vw, 28px); font-weight: 300; margin: 0; }
+.more__text { color: var(--muted); max-width: 560px; margin: 12px auto 24px; }
+.more__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
 /* About */
 .about { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: center; }
 .about__img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }

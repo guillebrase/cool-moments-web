@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cool Moments · Bisutería en Lloret de Mar</title>
+  <meta name="description" content="Cool Moments, tienda de bisutería en Carrer de Sant Pere 62, Lloret de Mar. Bisutería y accesorios en plata y acero, minerales, macramé y bolsos de piel.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Sacramento&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap header__inner">
+      <a href="#inicio" class="logo">cool moments</a>
+      <nav class="nav" id="nav">
+        <a href="#coleccion" data-i18n="nav.collection">Colección</a>
+        <a href="#nosotros" data-i18n="nav.about">Nosotros</a>
+        <a href="#visitanos" data-i18n="nav.visit">Visítanos</a>
+      </nav>
+      <div class="header__tools">
+        <label class="sr-only" for="lang">Idioma</label>
+        <select id="lang" class="lang">
+          <option value="es">ES</option>
+          <option value="ca">CA</option>
+          <option value="en">EN</option>
+          <option value="fr">FR</option>
+        </select>
+        <button class="cart-btn" id="cartOpen" aria-label="Cesta">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+          <span class="cart-btn__count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap hero__inner">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Bisutería · Lloret de Mar</p>
+        <h1 class="hero__title" data-i18n="hero.title">Pequeños detalles para tus mejores momentos</h1>
+        <p class="hero__text" data-i18n="hero.text">Bisutería y accesorios en plata y acero, minerales, macramé y bolsos de piel. En pleno centro de Lloret.</p>
+        <div class="hero__actions">
+          <a href="#coleccion" class="btn btn--dark" data-i18n="hero.cta">Ver colección</a>
+          <a href="#visitanos" class="btn btn--ghost" data-i18n="hero.cta2">Cómo llegar</a>
+        </div>
+      </div>
+      <div class="hero__photos" aria-hidden="true">
+        <img src="img/collar-mineral-turquesa.jpg" alt="">
+        <img src="img/pulsera-perlas-plata.jpg" alt="">
+        <img src="img/pendientes-triangulo.jpg" alt="">
+      </div>
+    </section>
+
+    <section class="section" id="coleccion">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-i18n="collection.title">Colección</h2>
+          <p data-i18n="collection.text">Reserva tus piezas y recógelas en tienda, o pregúntanos por WhatsApp.</p>
+        </div>
+        <div class="filters" id="filters" role="tablist"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="nosotros">
+      <div class="wrap about">
+        <img class="about__img" src="img/tienda.jpg" alt="Interior de la tienda Cool Moments" loading="lazy">
+        <div>
+        <h2 data-i18n="about.title">Nosotros</h2>
+        <p data-i18n="about.text">Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="visitanos">
+      <div class="wrap visit">
+        <div class="visit__info">
+          <h2 data-i18n="visit.title">Visítanos</h2>
+          <dl class="facts">
+            <div>
+              <dt data-i18n="visit.address">Dirección</dt>
+              <dd>Carrer de Sant Pere, 62<br>17310 Lloret de Mar, Girona</dd>
+            </div>
+            <div>
+              <dt data-i18n="visit.hours">Horario</dt>
+              <dd><span data-i18n="visit.days">Lunes a sábado</span><br>10:00 – 13:30 · 16:30 – 20:00</dd>
+            </div>
+            <div>
+              <dt data-i18n="visit.phone">Teléfono</dt>
+              <dd>+34 *** *** ***</dd>
+            </div>
+            <div>
+              <dt>Instagram</dt>
+              <dd><a href="https://www.instagram.com/coolmomentslloret/" target="_blank" rel="noopener">@coolmomentslloret</a></dd>
+            </div>
+          </dl>
+          <a class="btn btn--dark" href="https://www.google.com/maps/dir/?api=1&destination=Carrer+de+Sant+Pere+62+Lloret+de+Mar" target="_blank" rel="noopener" data-i18n="visit.directions">Abrir en Google Maps</a>
+        </div>
+        <div class="visit__map">
+          <iframe title="Mapa Cool Moments" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Carrer+de+Sant+Pere+62,+17310+Lloret+de+Mar&z=17&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="logo logo--small">cool moments</span>
+      <span>© <span id="year"></span> Cool Moments · Lloret de Mar</span>
+    </div>
+  </footer>
+
+  <!-- Cesta -->
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="cart" id="cart" aria-hidden="true">
+    <div class="cart__head">
+      <h3 data-i18n="cart.title">Tu cesta</h3>
+      <button class="icon-btn" id="cartClose" aria-label="Cerrar">✕</button>
+    </div>
+    <ul class="cart__list" id="cartList"></ul>
+    <p class="cart__empty" id="cartEmpty" data-i18n="cart.empty">Tu cesta está vacía.</p>
+    <div class="cart__foot">
+      <div class="cart__total" id="cartTotalRow"><span data-i18n="cart.total">Total</span><strong id="cartTotal">0 €</strong></div>
+      <button class="btn btn--dark btn--full" id="cartSend" data-i18n="cart.send">Enviar pedido por WhatsApp</button>
+      <p class="cart__note" data-i18n="cart.note">Te confirmamos disponibilidad y lo recoges en tienda.</p>
+    </div>
+  </aside>
+
+  <a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.8-1.1-4.6-4-4.8-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

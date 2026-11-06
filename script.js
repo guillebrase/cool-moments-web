@@ -2,6 +2,10 @@
 // Cuando tengas el número, ponlo aquí con prefijo de país y sin espacios ni "+", p. ej. "34600123456".
 const WHATSAPP_NUMBER = "";
 
+// Catálogo desde Google Sheets (opcional). Pega aquí el enlace CSV de la hoja publicada
+// (Archivo → Compartir → Publicar en la web → formato CSV). Si está vacío o falla, se usan los productos de abajo.
+const GOOGLE_SHEET_CSV = "";
+
 // Aviso en la parte de arriba de la web (vacaciones, rebajas...).
 // Para activarlo: activo: true. Si pones fechas, solo se muestra entre "desde" y "hasta" (ambos incluidos).
 const AVISO = {
@@ -18,7 +22,7 @@ const AVISO = {
 
 // Productos (fotos sacadas del Instagram de la tienda). "price": null muestra "Consultar precio".
 // Para poner precio, cambia null por el número, p. ej. price: 18
-const PRODUCTS = [
+let PRODUCTS = [
   { id: "collar-estrella-plata",  cat: "necklaces", price: null, name: { es: "Collar estrella de plata",           ca: "Collaret estel de plata",            en: "Silver star necklace",          fr: "Collier étoile en argent" } },
   { id: "collar-mineral-turquesa",cat: "necklaces", price: null, name: { es: "Collar Anartxy turquesa",            ca: "Collaret Anartxy turquesa",          en: "Anartxy turquoise necklace",    fr: "Collier Anartxy turquoise" } },
   { id: "collar-ambar",           cat: "necklaces", price: null, name: { es: "Collar Anartxy ámbar",               ca: "Collaret Anartxy ambre",             en: "Anartxy amber necklace",        fr: "Collier Anartxy ambre" } },
@@ -36,7 +40,7 @@ const PRODUCTS = [
 ].map((p) => ({ ...p, img: `img/${p.id}.webp` }));
 
 // Novedades: las últimas piezas de Instagram. Para cambiarlas, pon la foto en img/ y el código del post (instagram.com/p/CÓDIGO).
-const NOVEDADES = [
+let NOVEDADES = [
   { img: "img/nov-amazonita.webp",          post: "DeWH5gIiKLK", name: { es: "Collar de amazonita",          ca: "Collaret d'amazonita",       en: "Amazonite necklace",           fr: "Collier en amazonite" } },
   { img: "img/nov-ojo-tigre.webp",          post: "DeIEqKPCCmo", name: { es: "Ojo de tigre y jaspe africano", ca: "Ull de tigre i jaspi africà", en: "Tiger's eye & African jasper", fr: "Œil de tigre et jaspe africain" } },
   { img: "img/nov-anillos-minerales.webp",  post: "Dd93alJCNIp", name: { es: "Anillos de minerales",         ca: "Anells de minerals",         en: "Gemstone rings",               fr: "Bagues en pierres naturelles" } },
@@ -75,7 +79,7 @@ const T = {
     "custom.wa": "¡Hola Cool Moments! Os escribo desde la web.",
     "map.load": "Ver mapa",
     "map.note": "El mapa lo carga Google Maps, que puede usar cookies.",
-    "map.more": "Más información",
+    "map.more": "Política de cookies",
     "legal.notice": "Aviso legal",
     "legal.privacy": "Privacidad",
     "legal.cookies": "Cookies",
@@ -84,6 +88,7 @@ const T = {
     "new.text": "Lo último que ha llegado a la tienda. Toca una foto para verla en Instagram.",
     "about.badge": "Comercio adherido a «Comerç amb Valor» · Lloret de Mar 2026",
     "a11y.skip": "Saltar al contenido",
+    "cat.other": "Otros",
     "add": "Añadir", "added": "Añadido ✓",
     "about.title": "Nosotros",
     "about.text": "Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.",
@@ -124,7 +129,7 @@ const T = {
     "custom.wa": "Hola Cool Moments! Us escric des de la web.",
     "map.load": "Veure mapa",
     "map.note": "El mapa el carrega Google Maps, que pot fer servir galetes.",
-    "map.more": "Més informació",
+    "map.more": "Política de galetes",
     "legal.notice": "Avís legal",
     "legal.privacy": "Privacitat",
     "legal.cookies": "Galetes",
@@ -133,6 +138,7 @@ const T = {
     "new.text": "El darrer que ha arribat a la botiga. Toca una foto per veure-la a Instagram.",
     "about.badge": "Comerç adherit a «Comerç amb Valor» · Lloret de Mar 2026",
     "a11y.skip": "Anar al contingut",
+    "cat.other": "Altres",
     "add": "Afegir", "added": "Afegit ✓",
     "about.title": "Nosaltres",
     "about.text": "Cool Moments és una botiga de bijuteria i accessoris al carrer de Sant Pere de Lloret de Mar. Treballem amb plata, acer i minerals, i fem peces personalitzades i reparacions. Estil boho, molt de macramé i bosses de pell natural.",
@@ -173,7 +179,7 @@ const T = {
     "custom.wa": "Hi Cool Moments! I'm writing from your website.",
     "map.load": "Show map",
     "map.note": "The map is loaded by Google Maps, which may use cookies.",
-    "map.more": "More information",
+    "map.more": "Cookie policy",
     "legal.notice": "Legal notice",
     "legal.privacy": "Privacy",
     "legal.cookies": "Cookies",
@@ -182,6 +188,7 @@ const T = {
     "new.text": "The latest arrivals at the shop. Tap a photo to see it on Instagram.",
     "about.badge": "Member of «Comerç amb Valor» · Lloret de Mar 2026",
     "a11y.skip": "Skip to content",
+    "cat.other": "Other",
     "add": "Add", "added": "Added ✓",
     "about.title": "About us",
     "about.text": "Cool Moments is a jewellery and accessories shop on Carrer de Sant Pere in Lloret de Mar. We work with silver, steel and gemstones, and we make custom pieces and do repairs. Boho style, lots of macramé and natural leather bags.",
@@ -222,7 +229,7 @@ const T = {
     "custom.wa": "Bonjour Cool Moments ! Je vous écris depuis le site.",
     "map.load": "Afficher la carte",
     "map.note": "La carte est chargée par Google Maps, qui peut utiliser des cookies.",
-    "map.more": "Plus d'informations",
+    "map.more": "Politique de cookies",
     "legal.notice": "Mentions légales",
     "legal.privacy": "Confidentialité",
     "legal.cookies": "Cookies",
@@ -231,6 +238,7 @@ const T = {
     "new.text": "Les dernières arrivées en boutique. Touchez une photo pour la voir sur Instagram.",
     "about.badge": "Commerce membre de «Comerç amb Valor» · Lloret de Mar 2026",
     "a11y.skip": "Aller au contenu",
+    "cat.other": "Autres",
     "add": "Ajouter", "added": "Ajouté ✓",
     "about.title": "À propos",
     "about.text": "Cool Moments est une boutique de bijoux et d'accessoires de la Carrer de Sant Pere, à Lloret de Mar. Nous travaillons l'argent, l'acier et les pierres naturelles, et nous réalisons des pièces personnalisées et des réparations. Style bohème, beaucoup de macramé et des sacs en cuir naturel.",
@@ -256,9 +264,13 @@ let filter = "all";
 let cart = store.get("cm-cart") || {}; // { productId: qty }
 
 const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const srcset = (src) => /^img\/[\w-]+\.webp$/.test(src)
+  ? ` srcset="${src.replace(".webp", "-sm.webp")} 450w, ${src} 900w" sizes="(max-width: 820px) 50vw, 280px"` : "";
+const nm = (o) => esc(o.name[lang] || o.name.es);
 const t = (k) => T[lang][k] ?? T.es[k] ?? k;
 const priceLabel = (p, q = 1) => (p.price == null ? t("price.ask") : euro(p.price * q));
-const euro = (n) => new Intl.NumberFormat(lang + "-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+const euro = (n) => new Intl.NumberFormat(lang + "-ES", { style: "currency", currency: "EUR", minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }).format(n);
 
 // ================== RENDER ==================
 function applyTexts() {
@@ -267,10 +279,13 @@ function applyTexts() {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
   renderNotice();
   $("#lang").value = lang;
+  const L = { es: ["aviso-legal", "privacidad", "cookies"], ca: ["avis-legal", "privacitat", "galetes"], en: ["legal-notice", "privacy", "cookie-policy"] }[lang === "fr" ? "en" : lang];
+  ["#lnNotice", "#lnPrivacy", "#lnCookies"].forEach((id, i) => { $(id).href = L[i] + ".html"; });
+  $("#lnMapMore").href = L[2] + ".html";
 }
 
 function renderFilters() {
-  const cats = ["all", "necklaces", "earrings", "bracelets", "rings", "bags"];
+  const cats = ["all", "necklaces", "earrings", "bracelets", "rings", "bags", "other"].filter((c) => c === "all" || PRODUCTS.some((p) => p.cat === c));
   $("#filters").innerHTML = cats.map((c) =>
     `<button class="filter" type="button" data-cat="${c}" aria-pressed="${c === filter}">${t("cat." + c)}</button>`
   ).join("");
@@ -281,21 +296,21 @@ function renderGrid() {
   $("#grid").innerHTML = items.map((p) => `
     <article class="product">
       <div class="product__img">
-        <img src="${p.img}" alt="${p.name[lang]}" loading="lazy">
+        <img src="${esc(p.img)}"${srcset(p.img)} alt="" loading="lazy">
       </div>
       <div class="product__body">
         <span class="product__cat">${t("cat." + p.cat)}</span>
-        <h3 class="product__name">${p.name[lang]}</h3>
+        <h3 class="product__name">${nm(p)}</h3>
         <div class="product__row">
           <span class="product__price">${priceLabel(p)}</span>
-          <button class="add" type="button" data-id="${p.id}" aria-label="${t("add")}: ${p.name[lang]}">${t("add")}</button>
+          <button class="add" type="button" data-id="${p.id}" aria-label="${t("add")}: ${nm(p)}">${t("add")}</button>
         </div>
       </div>
     </article>`).join("");
 }
 
 function renderCart() {
-  const entries = Object.entries(cart).filter(([, q]) => q > 0);
+  const entries = Object.entries(cart).filter(([id, q]) => q > 0 && PRODUCTS.some((p) => p.id === id));
   const count = entries.reduce((s, [, q]) => s + q, 0);
   const priced = entries.filter(([id]) => PRODUCTS.find((p) => p.id === id).price != null);
   const total = priced.reduce((s, [id, q]) => s + PRODUCTS.find((p) => p.id === id).price * q, 0);
@@ -309,7 +324,7 @@ function renderCart() {
   $("#cartList").innerHTML = entries.map(([id, q]) => {
     const p = PRODUCTS.find((x) => x.id === id);
     return `<li class="cart__item">
-      <div><div class="cart__item-name">${p.name[lang]}</div><div class="cart__item-price">${priceLabel(p)}</div></div>
+      <div><div class="cart__item-name">${nm(p)}</div><div class="cart__item-price">${priceLabel(p)}</div></div>
       <div class="qty"><button data-dec="${id}" aria-label="-">−</button><span>${q}</span><button data-inc="${id}" aria-label="+">+</button></div>
     </li>`;
   }).join("");
@@ -318,9 +333,9 @@ function renderCart() {
 
 function renderNews() {
   $("#news").innerHTML = NOVEDADES.map((n) => `
-    <a class="news__item" href="https://www.instagram.com/p/${n.post}/" target="_blank" rel="noopener">
-      <img src="${n.img}" alt="${n.name[lang]}" loading="lazy">
-      <span>${n.name[lang]}</span>
+    <a class="news__item" href="${esc(n.url || `https://www.instagram.com/p/${n.post}/`)}" target="_blank" rel="noopener">
+      <img src="${esc(n.img)}"${srcset(n.img)} alt="" loading="lazy">
+      <span>${nm(n)}</span>
     </a>`).join("");
 }
 
@@ -332,9 +347,9 @@ function updateWaFloat() { $("#waFloat").href = WHATSAPP_NUMBER ? waLink(t("wa.g
 
 function sendOrder() {
   if (!WHATSAPP_NUMBER) { alert(t("wa.missing")); return; }
-  const lines = Object.entries(cart).filter(([, q]) => q > 0).map(([id, q]) => {
+  const lines = Object.entries(cart).filter(([id, q]) => q > 0 && PRODUCTS.some((p) => p.id === id)).map(([id, q]) => {
     const p = PRODUCTS.find((x) => x.id === id);
-    return `• ${q} × ${p.name[lang]}` + (p.price == null ? "" : ` (${euro(p.price * q)})`);
+    return `• ${q} × ${p.name[lang] || p.name.es}` + (p.price == null ? "" : ` (${euro(p.price * q)})`);
   });
   const totalLine = $("#cartTotalRow").hidden ? "" : `\n${t("cart.total")}: ${$("#cartTotal").textContent}`;
   window.open(waLink(`${t("wa.hello")}\n${lines.join("\n")}${totalLine}`), "_blank");
@@ -409,3 +424,58 @@ $("#customForm").addEventListener("submit", (e) => {
 });
 
 renderAll();
+
+// ================== CATÁLOGO DESDE GOOGLE SHEETS ==================
+// Columnas (la primera fila son los títulos): categoria, nombre, nombre_ca, nombre_en, nombre_fr, precio, foto, mostrar, novedad, instagram
+function parseCSV(text) {
+  const rows = []; let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ",") { row.push(cell); cell = ""; }
+    else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+    else cell += c;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.filter((r) => r.some((x) => x.trim()));
+}
+const norm = (s) => String(s || "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const yes = (s) => ["si", "sí", "x", "1", "yes", "true"].includes(norm(s));
+const CAT_MAP = { collar: "necklaces", collares: "necklaces", colgante: "necklaces", colgantes: "necklaces", pendiente: "earrings", pendientes: "earrings",
+  pulsera: "bracelets", pulseras: "bracelets", anillo: "rings", anillos: "rings", bolso: "bags", bolsos: "bags", "bolsos y accesorios": "bags" };
+function photoURL(s) {
+  s = String(s || "").trim();
+  const drive = s.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]+)/);
+  if (drive) return `https://drive.google.com/thumbnail?id=${drive[1]}&sz=w1000`;
+  return s;
+}
+function slug(s) { return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+async function loadSheet() {
+  if (!GOOGLE_SHEET_CSV) return;
+  try {
+    const res = await fetch(GOOGLE_SHEET_CSV, { cache: "no-store" });
+    if (!res.ok) throw new Error(res.status);
+    const [head, ...rows] = parseCSV(await res.text());
+    const h = head.map(norm);
+    const col = (r, name) => (r[h.indexOf(name)] ?? "").trim();
+    const items = rows.map((r) => {
+      const name = { es: col(r, "nombre"), ca: col(r, "nombre_ca"), en: col(r, "nombre_en"), fr: col(r, "nombre_fr") };
+      const precio = col(r, "precio").replace(/[^\d,.]/g, "").replace(",", ".");
+      return {
+        id: slug(name.es), cat: CAT_MAP[norm(col(r, "categoria"))] || "other", name,
+        price: precio ? Number(precio) : null, img: photoURL(col(r, "foto")),
+        show: col(r, "mostrar") === "" || yes(col(r, "mostrar")), isNew: yes(col(r, "novedad")),
+        url: col(r, "instagram") || "https://www.instagram.com/coolmomentslloret/",
+      };
+    }).filter((p) => p.name.es && p.img && p.show);
+    if (!items.length) return;
+    PRODUCTS = items;
+    const news = items.filter((p) => p.isNew).slice(0, 4);
+    if (news.length) NOVEDADES = news;
+    renderAll();
+  } catch (err) {
+    console.warn("No se pudo cargar la hoja de Google, se usa el catálogo incluido.", err);
+  }
+}
+loadSheet();

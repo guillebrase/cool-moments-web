@@ -26,7 +26,7 @@
 
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="fonts.css">
+  <link rel="preload" href="fonts/jost-300-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
 
   <!-- Datos de la tienda para Google -->
@@ -101,9 +101,9 @@
         </div>
       </div>
       <div class="hero__photos" aria-hidden="true">
-        <img src="img/collar-mineral-turquesa.webp" alt="">
-        <img src="img/pulsera-perlas-plata.webp" alt="">
-        <img src="img/pendientes-triangulo.webp" alt="">
+        <img src="img/collar-mineral-turquesa-sm.webp" alt="" loading="lazy">
+        <img src="img/pulsera-perlas-plata-sm.webp" alt="" loading="lazy">
+        <img src="img/pendientes-triangulo-sm.webp" alt="" loading="lazy">
       </div>
     </section>
 
@@ -144,14 +144,14 @@
         </div>
         <div class="custom">
           <article class="custom__card">
-            <img src="img/japamala.webp" alt="" loading="lazy">
+            <img src="img/japamala-sm.webp" srcset="img/japamala-sm.webp 450w, img/japamala.webp 900w" sizes="(max-width: 820px) 120px, 300px" alt="" loading="lazy">
             <div>
               <h3 data-i18n="custom.made.title">Piezas personalizadas</h3>
               <p data-i18n="custom.made.text">Collares con tu mineral favorito, japamalas a medida, pulseras con nombre o con los colores que elijas.</p>
             </div>
           </article>
           <article class="custom__card">
-            <img src="img/reparaciones.webp" alt="" loading="lazy">
+            <img src="img/reparaciones-sm.webp" srcset="img/reparaciones-sm.webp 450w, img/reparaciones.webp 900w" sizes="(max-width: 820px) 120px, 300px" alt="" loading="lazy">
             <div>
               <h3 data-i18n="custom.repair.title">Reparaciones</h3>
               <p data-i18n="custom.repair.text">Cambiamos cierres, reengarzamos collares y pulseras y arreglamos esa pieza a la que tienes cariño.</p>
@@ -179,7 +179,7 @@
 
     <section class="section" id="nosotros">
       <div class="wrap about">
-        <img class="about__img" src="img/tienda.webp" alt="Interior de la tienda Cool Moments" loading="lazy">
+        <img class="about__img" src="img/tienda.webp" srcset="img/tienda-sm.webp 450w, img/tienda.webp 900w" sizes="(max-width: 820px) 100vw, 500px" alt="Interior de la tienda Cool Moments" loading="lazy">
         <div>
           <h2 data-i18n="about.title">Nosotros</h2>
           <p data-i18n="about.text">Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.</p>
@@ -217,7 +217,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>
             <button class="btn btn--ghost" id="mapLoad" type="button" data-i18n="map.load">Ver mapa</button>
             <p data-i18n="map.note">El mapa lo carga Google Maps, que puede usar cookies.</p>
-            <a href="cookies.html" data-i18n="map.more">Más información</a>
+            <a href="cookies.html" id="lnMapMore" data-i18n="map.more">Política de cookies</a>
           </div>
         </div>
       </div>
@@ -228,9 +228,9 @@
     <div class="wrap footer__inner">
       <span class="logo logo--small">cool moments</span>
       <nav class="footer__legal">
-        <a href="aviso-legal.html" data-i18n="legal.notice">Aviso legal</a>
-        <a href="privacidad.html" data-i18n="legal.privacy">Privacidad</a>
-        <a href="cookies.html" data-i18n="legal.cookies">Cookies</a>
+        <a href="aviso-legal.html" id="lnNotice" data-i18n="legal.notice">Aviso legal</a>
+        <a href="privacidad.html" id="lnPrivacy" data-i18n="legal.privacy">Privacidad</a>
+        <a href="cookies.html" id="lnCookies" data-i18n="legal.cookies">Cookies</a>
       </nav>
       <span>© <span id="year"></span> Cool Moments · Lloret de Mar</span>
     </div>

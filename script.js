@@ -33,7 +33,15 @@ const PRODUCTS = [
   { id: "anillo-plata",           cat: "rings",     price: null, name: { es: "Anillo de plata orgánica",           ca: "Anell de plata orgànica",            en: "Organic silver ring",           fr: "Bague en argent organique" } },
   { id: "cabassos",               cat: "bags",      price: null, name: { es: "Capazos de mimbre y piel",           ca: "Cabassos de vímet i pell",           en: "Wicker & leather baskets",      fr: "Paniers osier et cuir" } },
   { id: "bolso-piel",             cat: "bags",      price: null, name: { es: "Bolso de piel trenzada",             ca: "Bossa de pell trenada",              en: "Woven leather bag",             fr: "Sac en cuir tressé" } },
-].map((p) => ({ ...p, img: `img/${p.id}.jpg` }));
+].map((p) => ({ ...p, img: `img/${p.id}.webp` }));
+
+// Novedades: las últimas piezas de Instagram. Para cambiarlas, pon la foto en img/ y el código del post (instagram.com/p/CÓDIGO).
+const NOVEDADES = [
+  { img: "img/nov-amazonita.webp",          post: "DeWH5gIiKLK", name: { es: "Collar de amazonita",          ca: "Collaret d'amazonita",       en: "Amazonite necklace",           fr: "Collier en amazonite" } },
+  { img: "img/nov-ojo-tigre.webp",          post: "DeIEqKPCCmo", name: { es: "Ojo de tigre y jaspe africano", ca: "Ull de tigre i jaspi africà", en: "Tiger's eye & African jasper", fr: "Œil de tigre et jaspe africain" } },
+  { img: "img/nov-anillos-minerales.webp",  post: "Dd93alJCNIp", name: { es: "Anillos de minerales",         ca: "Anells de minerals",         en: "Gemstone rings",               fr: "Bagues en pierres naturelles" } },
+  { img: "img/nov-collares-color.webp",     post: "DdxGNvzoxhc", name: { es: "Collares largos de colores",   ca: "Collarets llargs de colors", en: "Long colourful necklaces",     fr: "Sautoirs colorés" } },
+];
 
 // ================== TEXTOS ==================
 const T = {
@@ -71,6 +79,11 @@ const T = {
     "legal.notice": "Aviso legal",
     "legal.privacy": "Privacidad",
     "legal.cookies": "Cookies",
+    "nav.new": "Novedades",
+    "new.title": "Novedades",
+    "new.text": "Lo último que ha llegado a la tienda. Toca una foto para verla en Instagram.",
+    "about.badge": "Comercio adherido a «Comerç amb Valor» · Lloret de Mar 2026",
+    "a11y.skip": "Saltar al contenido",
     "add": "Añadir", "added": "Añadido ✓",
     "about.title": "Nosotros",
     "about.text": "Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.",
@@ -115,6 +128,11 @@ const T = {
     "legal.notice": "Avís legal",
     "legal.privacy": "Privacitat",
     "legal.cookies": "Galetes",
+    "nav.new": "Novetats",
+    "new.title": "Novetats",
+    "new.text": "El darrer que ha arribat a la botiga. Toca una foto per veure-la a Instagram.",
+    "about.badge": "Comerç adherit a «Comerç amb Valor» · Lloret de Mar 2026",
+    "a11y.skip": "Anar al contingut",
     "add": "Afegir", "added": "Afegit ✓",
     "about.title": "Nosaltres",
     "about.text": "Cool Moments és una botiga de bijuteria i accessoris al carrer de Sant Pere de Lloret de Mar. Treballem amb plata, acer i minerals, i fem peces personalitzades i reparacions. Estil boho, molt de macramé i bosses de pell natural.",
@@ -159,6 +177,11 @@ const T = {
     "legal.notice": "Legal notice",
     "legal.privacy": "Privacy",
     "legal.cookies": "Cookies",
+    "nav.new": "New in",
+    "new.title": "New in",
+    "new.text": "The latest arrivals at the shop. Tap a photo to see it on Instagram.",
+    "about.badge": "Member of «Comerç amb Valor» · Lloret de Mar 2026",
+    "a11y.skip": "Skip to content",
     "add": "Add", "added": "Added ✓",
     "about.title": "About us",
     "about.text": "Cool Moments is a jewellery and accessories shop on Carrer de Sant Pere in Lloret de Mar. We work with silver, steel and gemstones, and we make custom pieces and do repairs. Boho style, lots of macramé and natural leather bags.",
@@ -203,6 +226,11 @@ const T = {
     "legal.notice": "Mentions légales",
     "legal.privacy": "Confidentialité",
     "legal.cookies": "Cookies",
+    "nav.new": "Nouveautés",
+    "new.title": "Nouveautés",
+    "new.text": "Les dernières arrivées en boutique. Touchez une photo pour la voir sur Instagram.",
+    "about.badge": "Commerce membre de «Comerç amb Valor» · Lloret de Mar 2026",
+    "a11y.skip": "Aller au contenu",
     "add": "Ajouter", "added": "Ajouté ✓",
     "about.title": "À propos",
     "about.text": "Cool Moments est une boutique de bijoux et d'accessoires de la Carrer de Sant Pere, à Lloret de Mar. Nous travaillons l'argent, l'acier et les pierres naturelles, et nous réalisons des pièces personnalisées et des réparations. Style bohème, beaucoup de macramé et des sacs en cuir naturel.",
@@ -222,7 +250,8 @@ const store = {
 };
 
 const browserLang = (navigator.language || "es").slice(0, 2);
-let lang = store.get("cm-lang") || (T[browserLang] ? browserLang : "es");
+const urlLang = new URLSearchParams(location.search).get("lang");
+let lang = (T[urlLang] && urlLang) || store.get("cm-lang") || (T[browserLang] ? browserLang : "es");
 let filter = "all";
 let cart = store.get("cm-cart") || {}; // { productId: qty }
 
@@ -243,7 +272,7 @@ function applyTexts() {
 function renderFilters() {
   const cats = ["all", "necklaces", "earrings", "bracelets", "rings", "bags"];
   $("#filters").innerHTML = cats.map((c) =>
-    `<button class="filter" role="tab" data-cat="${c}" aria-selected="${c === filter}">${t("cat." + c)}</button>`
+    `<button class="filter" type="button" data-cat="${c}" aria-pressed="${c === filter}">${t("cat." + c)}</button>`
   ).join("");
 }
 
@@ -259,7 +288,7 @@ function renderGrid() {
         <h3 class="product__name">${p.name[lang]}</h3>
         <div class="product__row">
           <span class="product__price">${priceLabel(p)}</span>
-          <button class="add" data-id="${p.id}">${t("add")}</button>
+          <button class="add" type="button" data-id="${p.id}" aria-label="${t("add")}: ${p.name[lang]}">${t("add")}</button>
         </div>
       </div>
     </article>`).join("");
@@ -287,7 +316,15 @@ function renderCart() {
   store.set("cm-cart", cart);
 }
 
-function renderAll() { applyTexts(); renderFilters(); renderGrid(); renderCart(); updateWaFloat(); }
+function renderNews() {
+  $("#news").innerHTML = NOVEDADES.map((n) => `
+    <a class="news__item" href="https://www.instagram.com/p/${n.post}/" target="_blank" rel="noopener">
+      <img src="${n.img}" alt="${n.name[lang]}" loading="lazy">
+      <span>${n.name[lang]}</span>
+    </a>`).join("");
+}
+
+function renderAll() { applyTexts(); renderNews(); renderFilters(); renderGrid(); renderCart(); updateWaFloat(); }
 
 // ================== WHATSAPP ==================
 function waLink(text) { return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`; }
@@ -308,9 +345,15 @@ function openCart(open) {
   $("#cart").classList.toggle("is-open", open);
   $("#cart").setAttribute("aria-hidden", !open);
   $("#overlay").hidden = !open;
+  (open ? $("#cartClose") : $("#cartOpen")).focus();
 }
 
-$("#lang").addEventListener("change", (e) => { lang = e.target.value; store.set("cm-lang", lang); renderAll(); });
+$("#lang").addEventListener("change", (e) => {
+  lang = e.target.value; store.set("cm-lang", lang); renderAll();
+  const u = new URL(location.href);
+  if (lang === "es") u.searchParams.delete("lang"); else u.searchParams.set("lang", lang);
+  history.replaceState(null, "", u);
+});
 $("#filters").addEventListener("click", (e) => {
   const b = e.target.closest("[data-cat]"); if (!b) return;
   filter = b.dataset.cat; renderFilters(); renderGrid();
@@ -333,7 +376,7 @@ $("#cartClose").addEventListener("click", () => openCart(false));
 $("#overlay").addEventListener("click", () => openCart(false));
 $("#cartSend").addEventListener("click", sendOrder);
 $("#waFloat").addEventListener("click", (e) => { if (!WHATSAPP_NUMBER) { e.preventDefault(); alert(t("wa.missing")); } });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") openCart(false); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && $("#cart").classList.contains("is-open")) openCart(false); });
 
 // Limpia productos de la cesta que ya no existan
 cart = Object.fromEntries(Object.entries(cart).filter(([id]) => PRODUCTS.some((p) => p.id === id)));

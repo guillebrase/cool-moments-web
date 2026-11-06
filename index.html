@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cool Moments · Bisutería en Lloret de Mar</title>
   <meta name="description" content="Cool Moments, tienda de bisutería y accesorios en Carrer de Sant Pere 62, Lloret de Mar. Plata, acero, minerales, macramé y bolsos de piel. Encargos personalizados y reparaciones.">
-  <link rel="canonical" href="https://guillebrase.github.io/cool-moments-web/">
+  <link rel="alternate" hreflang="es" href="https://guillebrase.github.io/cool-moments-web/">
+  <link rel="alternate" hreflang="ca" href="https://guillebrase.github.io/cool-moments-web/?lang=ca">
+  <link rel="alternate" hreflang="en" href="https://guillebrase.github.io/cool-moments-web/?lang=en">
+  <link rel="alternate" hreflang="fr" href="https://guillebrase.github.io/cool-moments-web/?lang=fr">
+  <link rel="alternate" hreflang="x-default" href="https://guillebrase.github.io/cool-moments-web/">
   <meta name="theme-color" content="#faf9f7">
 
   <!-- Vista previa al compartir el enlace (WhatsApp, Instagram, Facebook...) -->
@@ -52,6 +56,7 @@
   </script>
 </head>
 <body>
+  <a class="skip" href="#main" data-i18n="a11y.skip">Saltar al contenido</a>
 
   <div class="notice" id="notice" hidden>
     <p class="notice__text" id="noticeText"></p>
@@ -62,6 +67,7 @@
     <div class="wrap header__inner">
       <a href="#inicio" class="logo">cool moments</a>
       <nav class="nav" id="nav">
+        <a href="#novedades" data-i18n="nav.new">Novedades</a>
         <a href="#coleccion" data-i18n="nav.collection">Colección</a>
         <a href="#encargos" data-i18n="nav.custom">Encargos</a>
         <a href="#nosotros" data-i18n="nav.about">Nosotros</a>
@@ -83,7 +89,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero" id="inicio">
       <div class="wrap hero__inner">
         <p class="eyebrow" data-i18n="hero.eyebrow">Bisutería · Lloret de Mar</p>
@@ -95,9 +101,19 @@
         </div>
       </div>
       <div class="hero__photos" aria-hidden="true">
-        <img src="img/collar-mineral-turquesa.jpg" alt="">
-        <img src="img/pulsera-perlas-plata.jpg" alt="">
-        <img src="img/pendientes-triangulo.jpg" alt="">
+        <img src="img/collar-mineral-turquesa.webp" alt="">
+        <img src="img/pulsera-perlas-plata.webp" alt="">
+        <img src="img/pendientes-triangulo.webp" alt="">
+      </div>
+    </section>
+
+    <section class="section section--tight" id="novedades">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 data-i18n="new.title">Novedades</h2>
+          <p data-i18n="new.text">Lo último que ha llegado a la tienda. Toca una foto para verla en Instagram.</p>
+        </div>
+        <div class="news" id="news"></div>
       </div>
     </section>
 
@@ -107,7 +123,7 @@
           <h2 data-i18n="collection.title">Colección</h2>
           <p data-i18n="collection.text">Reserva tus piezas y recógelas en tienda, o pregúntanos por WhatsApp.</p>
         </div>
-        <div class="filters" id="filters" role="tablist"></div>
+        <div class="filters" id="filters" role="group" aria-label="Filtrar por categoría"></div>
         <div class="grid" id="grid"></div>
         <div class="more">
           <p class="more__title" data-i18n="more.title">Esto es solo una pequeña muestra</p>
@@ -128,14 +144,14 @@
         </div>
         <div class="custom">
           <article class="custom__card">
-            <img src="img/japamala.jpg" alt="" loading="lazy">
+            <img src="img/japamala.webp" alt="" loading="lazy">
             <div>
               <h3 data-i18n="custom.made.title">Piezas personalizadas</h3>
               <p data-i18n="custom.made.text">Collares con tu mineral favorito, japamalas a medida, pulseras con nombre o con los colores que elijas.</p>
             </div>
           </article>
           <article class="custom__card">
-            <img src="img/colgante-moldavita.jpg" alt="" loading="lazy">
+            <img src="img/reparaciones.webp" alt="" loading="lazy">
             <div>
               <h3 data-i18n="custom.repair.title">Reparaciones</h3>
               <p data-i18n="custom.repair.text">Cambiamos cierres, reengarzamos collares y pulseras y arreglamos esa pieza a la que tienes cariño.</p>
@@ -163,10 +179,11 @@
 
     <section class="section" id="nosotros">
       <div class="wrap about">
-        <img class="about__img" src="img/tienda.jpg" alt="Interior de la tienda Cool Moments" loading="lazy">
+        <img class="about__img" src="img/tienda.webp" alt="Interior de la tienda Cool Moments" loading="lazy">
         <div>
           <h2 data-i18n="about.title">Nosotros</h2>
           <p data-i18n="about.text">Cool Moments es una tienda de bisutería y accesorios en la Carrer de Sant Pere de Lloret de Mar. Trabajamos con plata, acero y minerales, y hacemos piezas personalizadas y reparaciones. Estilo boho, mucho macramé y bolsos de piel natural.</p>
+          <p class="badge" data-i18n="about.badge">Comercio adherido a «Comerç amb Valor» · Lloret de Mar 2026</p>
         </div>
       </div>
     </section>
@@ -221,9 +238,9 @@
 
   <!-- Cesta -->
   <div class="overlay" id="overlay" hidden></div>
-  <aside class="cart" id="cart" aria-hidden="true">
+  <aside class="cart" id="cart" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
     <div class="cart__head">
-      <h3 data-i18n="cart.title">Tu cesta</h3>
+      <h3 id="cartTitle" data-i18n="cart.title">Tu cesta</h3>
       <button class="icon-btn" id="cartClose" aria-label="Cerrar">✕</button>
     </div>
     <ul class="cart__list" id="cartList"></ul>
